@@ -76,7 +76,7 @@ task :prepackage do
     puts "  NEWS (with latest release notes)"
     puts "  lib/net/netrc.rb (with current version number)"
     puts
-    puts "  cvs tag #{Net::Netrc::VERSION_MAJOR}_#{Net::Netrc::VERSION_MINOR}_#{Net::Netrc::VERSION_PATCH}_RELEASE"
+    puts "  cvs tag v#{Net::Netrc::VERSION_MAJOR}_#{Net::Netrc::VERSION_MINOR}_#{Net::Netrc::VERSION_PATCH}_RELEASE"
     puts
     puts "If you are sure these have all been taken care of, re-run"
     puts "rake with 'OK=yes'."
