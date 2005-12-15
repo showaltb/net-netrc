@@ -75,6 +75,7 @@ task :prepackage do
     puts
     puts "  NEWS (with latest release notes)"
     puts "  lib/net/netrc.rb (with current version number)"
+    puts "  rake pubrdoc"
     puts
     puts "  cvs tag v#{Net::Netrc::VERSION_MAJOR}_#{Net::Netrc::VERSION_MINOR}_#{Net::Netrc::VERSION_PATCH}_RELEASE"
     puts
