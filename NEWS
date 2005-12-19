@@ -1,5 +1,13 @@
 $Id$
 
+0.2.0: 2005-12-19
+
+    * Added net/ftp-netrc.rb, providing extension to Net::FTP's
+    login method for auto-login using .netrc file.
+
+    * Added examples, .netrc documentation, additional method
+    documentation.
+
 0.1.0: 2005-12-15
 
     * Initial public release.
