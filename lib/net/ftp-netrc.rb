@@ -40,7 +40,7 @@ module Net
     # connected. 
     #
     # If +user+ is nil, Net::Netrc#locate is used to lookup login information
-    # based on the host name supplied to Net::Netrc#connect.
+    # based on the host name supplied when the connection was established.
     #
     # If +user+ is the string "anonymous" and the +password+ is nil, a password
     # of user@host is synthesized. If the +acct+ parameter is not nil, an FTP
