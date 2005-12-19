@@ -13,6 +13,69 @@ require 'etc'
 
 module Net
 
+  # Net::Netrc provides an interface to the ftp(1) .netrc file containing login
+  # information for FTP (or other) servers.
+  #
+  # == Example Usage
+  #
+  #   require 'net/netrc'
+  #
+  #   rc = Net::Netrc.locate('ftp.example.com') or
+  #     raise ".netrc missing or no entry found"
+  #   puts rc.login
+  #   puts rc.password
+  #   puts rc.name
+  #
+  # == The .netrc File
+  #
+  # The .netrc file is a plain text file containing login information.  It is
+  # typically located in the user's home directory. (See #rcname for specific
+  # details on how the .netrc file is located.)
+  #
+  # On Unix platforms, the .netrc must be owned by the process' effective
+  # user id and must not be group- or world-writable, or a SecurityError
+  # will be raised.
+  #
+  # The .netrc file contains whitespace-separated tokens. Tokens containing
+  # whitespace must be enclosed in double quotes. The following tokens are
+  # recognized:
+  #
+  # [machine _name_]
+  #   Identifies a remote machine name. #locate searches sequentially for
+  #   a matching +machine+ token. Once a match is found, subsequent tokens
+  #   are processed until either EOF is reached or another +machine+
+  #   (or +default+) token is parsed.
+  #
+  # [login _name_]
+  #   Identifies remote user name.
+  #
+  # [password _string_]
+  #   Supplies remote password.
+  #   
+  # [account _string_]
+  #   Supplies an additional account password.
+  #
+  # [macdef _name_]
+  #   Begins a macro definition, which ends with the next blank line
+  #   encountered. Ignored by Net::Netrc.
+  #
+  # [default]
+  #   Defines default account information. The login information here
+  #   will be returned if a matching +machine+ token is not found
+  #   during parsing. If supplied, +default+ must appear after any
+  #   +machine+ entries.
+  #
+  # == Sample .netrc file
+  #
+  # The following is an example of a .netrc file:
+  #
+  #   machine host1.austin.century.com 
+  #     login fred 
+  #     password bluebonnet
+  #
+  #   default login john password ranger
+  #
+
   class Netrc
 
     VERSION_MAJOR = 0
@@ -112,6 +175,12 @@ module Net
     # given a machine name, returns a Net::Netrc object containing
     # the matching entry for that name, or the default entry. If
     # no match is found and no default entry exists, nil is returned.
+    #
+    # The returned object's #machine, #login, #password, and #account
+    # attributes will be set to the corresponding values from the .netrc file
+    # entry.  #machine will be nil if the +default+ .netrc entry was used. The
+    # other attributes will be nil if the corresponding token in the .netrc
+    # file was not present.
     #
     # +io+ is a previously-opened IO object. If not supplied,
     # #rcopen is called to locate and open the .netrc file. +io+

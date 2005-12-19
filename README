@@ -13,7 +13,7 @@ modify this library.
 
 See Net::Netrc for usage.
 
-==installation
+== Installation
 
 As a gem:
 
@@ -24,3 +24,25 @@ Using setup.rb:
 
   $ su
   # ruby setup.rb
+
+== Example Usage
+
+Standalone usage:
+
+  require 'net/netrc'
+
+  rc = Net::Netrc.locate('ftp.example.com') or
+    raise ".netrc missing or no entry found"
+  puts rc.login
+  puts rc.password
+  puts rc.name
+
+Net::FTP auto-login:
+
+  require 'net/ftp-netrc'
+
+  ftp = Net::FTP.new('ftp.example.com')
+  ftp.login(nil)          # nil username triggers Net::Netrc lookup
+  puts ftp.last_response
+  => 230 User myuser logged in.
+
