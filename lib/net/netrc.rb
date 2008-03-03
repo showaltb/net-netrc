@@ -1,13 +1,11 @@
 # = net/netrc.rb - ftp(1) .netrc parsing
 #
-# Copyright (c) 2005 Robert J. Showalter
+# Copyright (c) 2005, 2008 Robert J. Showalter
 #
 # This library is distributed under the terms of the Ruby license.
 # You may freely distribute or modify this library.
 #
 # See Net::Netrc for usage.
-#
-# $Id$
 
 require 'etc'
 
@@ -80,7 +78,7 @@ module Net
 
     VERSION_MAJOR = 0
     VERSION_MINOR = 2
-    VERSION_PATCH = 0
+    VERSION_PATCH = 1
     VERSION = "#{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_PATCH}"
 
     # detect whether running on MS Windows platform
@@ -141,7 +139,7 @@ module Net
       end
 
       # return first found file
-      dirs.flatten.each do |dir|
+      dirs.compact.each do |dir|
         files.each do |file|
           name = File.join(dir, file)
           return name if File.exist?(name)

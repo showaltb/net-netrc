@@ -19,14 +19,14 @@ SOURCE_FILES = FileList.new do |fl|
     fl.include "#{dir}/**/*"
   end
   fl.include "Rakefile"
-  fl.exclude( /\bCVS\b/ )
+  fl.exclude( /\b.svn\b/ )
 end
 
 PACKAGE_FILES = FileList.new do |fl|
   fl.include "ChangeLog", "NEWS", "LICENSE", "TODO", "#{PACKAGE_NAME}.gemspec"
   fl.include "README", "setup.rb"
   fl.include SOURCE_FILES
-  fl.exclude( /\bCVS\b/ )
+  fl.exclude( /\b.svn\b/ )
 end
 
 Gem.manage_gems
@@ -52,12 +52,12 @@ task :clean do
   rm_f  "ChangeLog"
 end
 
-desc "Generate the changelog using cvs2cl"
+desc "Generate the changelog using svn2cl"
 task :changelog => "ChangeLog"
 
 file "ChangeLog" do
-  unless system "touch ChangeLog; cvs2cl"
-    warn "could not generate ChangeLog (cvs2cl missing?)"
+  unless system "touch ChangeLog; svn2cl"
+    warn "could not generate ChangeLog (svn2cl missing?)"
   end
 end
 
@@ -77,7 +77,7 @@ task :prepackage do
     puts "  lib/net/netrc.rb (with current version number)"
     puts "  rake pubrdoc"
     puts
-    puts "  cvs tag v#{Net::Netrc::VERSION_MAJOR}_#{Net::Netrc::VERSION_MINOR}_#{Net::Netrc::VERSION_PATCH}_RELEASE"
+    puts "  tag v#{Net::Netrc::VERSION_MAJOR}_#{Net::Netrc::VERSION_MINOR}_#{Net::Netrc::VERSION_PATCH}_RELEASE created"
     puts
     puts "If you are sure these have all been taken care of, re-run"
     puts "rake with 'OK=yes'."
@@ -154,7 +154,9 @@ desc "Build the RDoc documentation"
 Rake::RDocTask.new( :rdoc ) do |rdoc|
   rdoc.rdoc_dir = rdoc_dir
   rdoc.title    = "Net::Netrc -- ftp(1)-style .netrc parsing"
-  rdoc.options << '--inline-source --main README'
+  rdoc.options << '--inline-source'
+  rdoc.options << '--main'
+  rdoc.options << 'README'
   rdoc.rdoc_files.include 'README'
   rdoc.rdoc_files.include 'lib/**/*.rb'
 end

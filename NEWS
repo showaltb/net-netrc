@@ -1,4 +1,7 @@
-$Id$
+0.2.1: 2008-03-03
+
+    * Fixed TypeError bug on Win32 in Net::Netrc.rcname (thanks to
+    Inoue Yasuyuki)
 
 0.2.0: 2005-12-19
 

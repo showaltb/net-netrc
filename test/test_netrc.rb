@@ -7,10 +7,14 @@ require 'test/unit'
 
 class TestNetrc < Test::Unit::TestCase
 
-  SAMPLE_NETRC = 'dot.netrc.test'
+  if Net::Netrc::IS_WIN32
+    SAMPLE_NETRC = File.join(File.dirname(__FILE__), '_netrc')
+  else
+    SAMPLE_NETRC = File.join(File.dirname(__FILE__), '.netrc')
+  end
 
   def setup
-    @path = File.join(File.dirname(__FILE__), SAMPLE_NETRC)
+    @path = SAMPLE_NETRC
     File.open(@path, 'w') do |f|
       f << <<EOT
 machine example.com
@@ -91,6 +95,23 @@ EOT
     assert_equal(default.password, entry.password)
     assert_equal(default.account, entry.account)
 
+  end
+
+  def test_rcname
+    assert_equal SAMPLE_NETRC, Net::Netrc.rcname
+    ENV.delete('NETRC')
+    home = Etc.getpwuid.dir rescue nil
+    if home && File.exists?(File.join(home, '.netrc'))
+      assert_equal File.join(home, '.netrc'), Net::Netrc.rcname
+    else
+      ENV['HOME'] = File.dirname(__FILE__)
+      assert_equal SAMPLE_NETRC, Net::Netrc.rcname
+      if Net::Netrc::IS_WIN32
+        ENV.delete('HOME')
+        ENV['USERPROFILE'] = File.dirname(__FILE__)
+        assert_equal SAMPLE_NETRC, Net::Netrc.rcname
+      end
+    end
   end
 
 end
