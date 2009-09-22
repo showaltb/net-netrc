@@ -27,8 +27,6 @@ PACKAGE_FILES = FileList.new do |fl|
   fl.exclude( /\b.svn\b/ )
 end
 
-Gem.manage_gems
-
 def can_require( file )
   begin
     require file
@@ -50,12 +48,12 @@ task :clean do
   rm_f  "ChangeLog"
 end
 
-desc "Generate the changelog using svn2cl"
+desc "Generate the changelog using git2cl"
 task :changelog => "ChangeLog"
 
 file "ChangeLog" do
-  unless system "touch ChangeLog; svn2cl"
-    warn "could not generate ChangeLog (svn2cl missing?)"
+  unless system "./git2cl >ChangeLog"
+    warn "could not generate ChangeLog (git2cl missing?)"
   end
 end
 
