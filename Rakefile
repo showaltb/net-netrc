@@ -1,5 +1,3 @@
-# $Id$
-#
 # Net::Netrc Rakefile
 # major inspiration from Jamis Buck's Net::SSH Rakefile (thanks!)
 

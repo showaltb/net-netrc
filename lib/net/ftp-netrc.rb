@@ -16,8 +16,6 @@
 #   ftp.login(nil)
 #   ftp.last_response
 #   => 230 User myuser logged in.
-#
-# $Id$
 
 require 'net/ftp'
 require 'net/netrc'
