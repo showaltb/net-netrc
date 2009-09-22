@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.has_rdoc=true
   s.test_file = 'test/test_netrc.rb'
   s.author = "Bob Showalter"
-  s.email = "bshow@rubyforge.org"
+  s.email = "showaltb@gmail.com"
   s.homepage = "http://net-netrc.rubyforge.org"
 end

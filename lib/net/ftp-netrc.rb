@@ -1,6 +1,6 @@
 # = net/ftp-netrc.rb - Net::FTP / Net::Netrc integration
 #
-# Copyright (c) 2005 Robert J. Showalter
+# Copyright (c) 2005-2009 Bob Showalter
 #
 # This library is distributed under the terms of the Ruby license.
 # You may freely distribute or modify this library.
