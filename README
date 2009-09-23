@@ -3,7 +3,10 @@
 A pure Ruby module providing ftp(1)-compatible .netrc file parsing.
 
 Author: Bob Showalter (showaltb@gmail.com)
-Website: http://net-netrc.rubyforge.org
+
+Website: http://www.rubyforge.org/projects/net-netrc
+
+Source: http://github.com/showaltb/net-netrc
 
 Copyright (c) 2005-2009 Bob Showalter
 
