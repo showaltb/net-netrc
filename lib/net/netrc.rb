@@ -78,7 +78,7 @@ module Net
 
     VERSION_MAJOR = 0
     VERSION_MINOR = 2
-    VERSION_PATCH = 1
+    VERSION_PATCH = 2
     VERSION = "#{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_PATCH}"
 
     # detect whether running on MS Windows platform
