@@ -1,5 +1,3 @@
-# $Id$
-
 require './lib/net/netrc'
 
 Gem::Specification.new do |s|
