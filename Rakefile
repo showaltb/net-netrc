@@ -162,6 +162,6 @@ desc "Publish the RDoc documentation"
 task :pubrdoc => [ :rdoc ] do
   Rake::SshDirPublisher.new(
     "bshow@rubyforge.org",
-    "/var/www/gforge-projects/net-netrc/doc",
+    "/var/www/gforge-projects/net-netrc",
     "doc" ).upload
 end
